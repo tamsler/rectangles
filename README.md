@@ -1,23 +1,20 @@
-Local Development Dependencies
-------------------------------
+## Local Development Dependencies
 
-# Java 8+
-# Maven
+- Java 8+
+- Maven
 
-Execution & Testing
--------------------
+## Execution & Testing
+### To run program
+- mvn exec:java
 
-# To run program
-mvn exec:java
+### To run tests
+- mvn test
 
-# To run tests
-mvn test
+### Run individual test file
+- mvn -Dtest=TestRectangle test
 
-# Run individual test file e.g.
-mvn -Dtest=TestRectangle test
+### To run tests and run program
+- mvn test exec:java
 
-# To run tests and run program
-mvn test exec:java
-
-# Test coverage results
-./target/site/jacoco/index.html
+### Test coverage results
+- ./target/site/jacoco/index.html
