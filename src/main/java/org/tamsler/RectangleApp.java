@@ -116,6 +116,6 @@ public class RectangleApp {
         System.out.println(rectangle1 + " : " + rectangle2);
         System.out.println(shapeOperationsInterface.getIntersectionType(rectangle1, rectangle2));
         System.out.println(shapeOperationsInterface.getContainmentType(rectangle1, rectangle2));
-        System.out.println(shapeOperationsInterface.getAdjacencyType(rectangle1, rectangle2));
+        System.out.println(shapeOperationsInterface.getAdjacencyType(rectangle1, rectangle2)+ "\n");
     }
 }
