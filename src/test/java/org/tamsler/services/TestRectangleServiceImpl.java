@@ -72,6 +72,39 @@ public class TestRectangleServiceImpl {
         assertFalse(rectangleService.hasIntersection(r2, r1));
     }
 
+    // Test hasIntersection
+    @Test
+    public void testBorderIntersection() {
+        RectangleServiceImpl rectangleService = RectangleServiceImpl.getInstance();
+
+        Rectangle r1 = new Rectangle(new Point(0, 0), new Point(3, 4));
+        Rectangle r2 = new Rectangle(new Point(3, 1), new Point(5, 2));
+
+        assertTrue(rectangleService.hasIntersection(r1, r2));
+    }
+
+    // Test hasIntersection
+    @Test
+    public void testPointIntersection() {
+        RectangleServiceImpl rectangleService = RectangleServiceImpl.getInstance();
+
+        Rectangle r1 = new Rectangle(new Point(0, 0), new Point(3, 4));
+        Rectangle r2 = new Rectangle(new Point(3, 4), new Point(5, 7));
+
+        assertTrue(rectangleService.hasIntersection(r1, r2));
+    }
+
+    // Test hasIntersection
+    @Test
+    public void testCrossIntersection() {
+        RectangleServiceImpl rectangleService = RectangleServiceImpl.getInstance();
+
+        Rectangle r1 = new Rectangle(new Point(0, 0), new Point(4, 2));
+        Rectangle r2 = new Rectangle(new Point(2, -1), new Point(3, 4));
+
+        assertTrue(rectangleService.hasIntersection(r1, r2));
+    }
+
     // Test getIntersectionCoordinates
     @Test
     public void getIntersectionCoordinatesCase1() {

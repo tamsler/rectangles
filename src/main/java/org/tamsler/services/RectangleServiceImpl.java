@@ -70,11 +70,29 @@ public class RectangleServiceImpl extends AbstractShapeService<Rectangle> {
     @Override
     public String getIntersectionCoordinates(Rectangle r1, Rectangle r2) {
 
-        int bottomLeftX = Math.max(r1.getBottomLeft().getX(),r2.getBottomLeft().getX());
+        int bottomLeftX = Math.max(r1.getBottomLeft().getX(), r2.getBottomLeft().getX());
         int bottomLeftY = Math.max(r1.getBottomLeft().getY(), r2.getBottomLeft().getY());
         int topRightX = Math.min(r1.getBottomRight().getX(), r2.getBottomRight().getX());
         int topRightY = Math.min(r1.getTopLeft().getY(), r2.getTopLeft().getY());
-        return new Point(bottomLeftX, bottomLeftY) + " " + new Point(topRightX, topRightY);
+
+        Point intersection1 = new Point(bottomLeftX, bottomLeftY);
+        Point intersection2 = new Point(topRightX, topRightY);
+
+        // Point Intersection -> return one point
+        if (intersection1.equals(intersection2)) {
+            return intersection1.toString();
+        }
+        // Crossing Intersection -> return 4 points
+        else if (isCrossIntersecting(r1, r2) || isCrossIntersecting(r2, r1)) {
+
+            Rectangle rectangle = new Rectangle(intersection1, intersection2);
+            return rectangle.getBottomLeft() + " " + rectangle.getBottomRight() + " " + rectangle.getTopRight() + " "
+                    + rectangle.getTopLeft();
+
+        } else {
+            // Border & Overlapping Intersection -> return 2 points
+            return new Point(bottomLeftX, bottomLeftY) + " " + new Point(topRightX, topRightY);
+        }
     }
 
     /**
@@ -94,7 +112,7 @@ public class RectangleServiceImpl extends AbstractShapeService<Rectangle> {
 
         AdjacencyResult adjacencyResult = new AdjacencyResult();
         // Check adjacency: r1 and r2 have a common side in the X plane
-        
+
         if (r1.getBottomRight().getX() == r2.getBottomLeft().getX()
                 || r2.getBottomRight().getX() == r1.getBottomLeft().getX()) {
 
@@ -130,7 +148,7 @@ public class RectangleServiceImpl extends AbstractShapeService<Rectangle> {
     }
 
     /**
-     * Helper Methods
+     * Adjacency methods
      */
 
     // ProperAdjacency
@@ -172,5 +190,14 @@ public class RectangleServiceImpl extends AbstractShapeService<Rectangle> {
     protected void hasPartialAdjacencyX(Rectangle r1, Rectangle r2, AdjacencyResult adjacencyResult) {
         adjacencyResult.hasPartialAdjacencyX = (r1.getTopLeft().getX() > r2.getBottomLeft().getX()
                 || r1.getTopRight().getX() < r2.getBottomRight().getX()) ? true : false;
+    }
+
+    // Cross Intersection detection
+    protected boolean isCrossIntersecting(Rectangle r1, Rectangle r2) {
+
+        return (r2.getBottomLeft().getX() < r1.getBottomLeft().getX()
+                && r1.getTopRight().getX() < r2.getTopRight().getX()
+                && r1.getBottomLeft().getY() < r2.getBottomLeft().getY()
+                && r2.getTopRight().getY() < r1.getTopRight().getY());
     }
 }
