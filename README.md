@@ -1,3 +1,5 @@
+[![Java CI with Maven](https://github.com/tamsler/rectangles/actions/workflows/maven.yml/badge.svg)](https://github.com/tamsler/rectangles/actions/workflows/maven.yml)
+
 ## Local Development Dependencies
 
 - Java 8+
