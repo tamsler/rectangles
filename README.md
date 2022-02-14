@@ -7,7 +7,7 @@
 
 ## Execution & Testing
 ### To run program
-- mvn exec:java
+- mvn compile exec:java
 
 ### To run tests
 - mvn test
@@ -15,8 +15,9 @@
 ### Run individual test file
 - mvn -Dtest=TestRectangle test
 
-### To run tests and run program
-- mvn test exec:java
-
 ### Test coverage results
 - ./target/site/jacoco/index.html
+
+### Javadocs
+- mvn javadoc:javadoc
+- ./target/site/apidocs/index.html 
