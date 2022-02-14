@@ -182,14 +182,29 @@ public class RectangleServiceImpl extends AbstractShapeService<Rectangle> {
     }
 
     // PartialAdjacency
+
+    // Compare points along the Y axis
     protected void hasPartialAdjacencyY(Rectangle r1, Rectangle r2, AdjacencyResult adjacencyResult) {
-        adjacencyResult.hasPartialAdjacencyY = (r1.getTopRight().getY() < r2.getTopLeft().getY()
-                || r1.getBottomRight().getY() > r2.getBottomLeft().getY()) ? true : false;
+
+        adjacencyResult.hasPartialAdjacencyY = ((r1.getTopRight().getY() > r2.getTopLeft().getY()
+                && r2.getTopLeft().getY() > r1.getBottomRight().getY()
+                && r1.getBottomRight().getY() > r1.getBottomLeft().getY())
+                ||
+                (r2.getTopLeft().getY() > r1.getTopRight().getY()
+                        && r1.getTopRight().getY() > r2.getBottomLeft().getY()
+                        && r2.getBottomLeft().getY() > r1.getBottomRight().getY())) ? true : false;
     }
 
+    // Compare points along the X axis
     protected void hasPartialAdjacencyX(Rectangle r1, Rectangle r2, AdjacencyResult adjacencyResult) {
-        adjacencyResult.hasPartialAdjacencyX = (r1.getTopLeft().getX() > r2.getBottomLeft().getX()
-                || r1.getTopRight().getX() < r2.getBottomRight().getX()) ? true : false;
+
+        adjacencyResult.hasPartialAdjacencyX = ((r2.getBottomLeft().getX() < r1.getTopLeft().getX()
+                && r2.getBottomRight().getX() < r1.getTopRight().getX()
+                && r1.getTopLeft().getX() < r2.getBottomRight().getX())
+                ||
+                (r1.getTopLeft().getX() < r2.getBottomLeft().getX() &&
+                        r2.getBottomLeft().getX() < r1.getTopRight().getX() &&
+                        r1.getTopRight().getX() < r2.getBottomRight().getX())) ? true : false;
     }
 
     // Cross Intersection detection
