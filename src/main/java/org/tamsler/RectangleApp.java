@@ -27,7 +27,8 @@ public class RectangleApp {
      * Then process each line and detect rectangle relationship as outlined
      * by the program's requirements.
      * 
-     * @throws FileNotFoundException, IllegalArgumentException
+     * @throws FileNotFoundException
+     * @throws IllegalArgumentException
      */
     protected void processFile(String fileName) throws FileNotFoundException, IllegalArgumentException {
 
